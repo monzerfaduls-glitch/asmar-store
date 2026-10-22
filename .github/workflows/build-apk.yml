@@ -22,17 +22,12 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.19.x' # أو الإصدار المناسب لمشروعك
+          flutter-version: '3.19.0'
           channel: 'stable'
+          cache: true
 
       - name: Install dependencies
         run: flutter pub get
-
-      - name: Run Android patch if needed
-        run: |
-          if [ -f "tools/patch_android.py" ]; then
-            python3 tools/patch_android.py
-          fi
 
       - name: Build APK
         run: flutter build apk --release
@@ -42,4 +37,3 @@ jobs:
         with:
           name: app-release
           path: build/app/outputs/flutter-apk/app-release.apk
-
